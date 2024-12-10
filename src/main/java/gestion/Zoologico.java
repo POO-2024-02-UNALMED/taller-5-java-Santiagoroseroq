@@ -1,9 +1,11 @@
-
 package gestion;
 
 import java.util.ArrayList;
 import java.util.List;
-import zooAnimales.Animal;
+import zooAnimales.Mamifero;
+import zooAnimales.Ave;
+import zooAnimales.Reptil;
+import zooAnimales.Pez;
 
 public class Zoologico {
     private String nombre;
@@ -11,6 +13,7 @@ public class Zoologico {
     private List<Zona> zonas;
 
     public Zoologico() {}
+    
 
     public Zoologico(String nombre, String ubicacion) {
         this.nombre = nombre;
