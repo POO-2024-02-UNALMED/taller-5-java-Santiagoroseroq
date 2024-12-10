@@ -1,6 +1,7 @@
-// Anfibio.java
 package zooAnimales;
 
+import java.util.ArrayList;
+import java.util.List;
 import gestion.Zona;
 
 public class Anfibio extends Animal {
