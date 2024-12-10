@@ -1,12 +1,11 @@
-
 package zooAnimales;
-import java.util.List;
-import gestion.Zona;
+
+import java.util.stream.Collectors;
+
 
 public class Ave extends Animal {
     private static int halcones = 0;
     private static int aguilas = 0;
-    private static List<Ave> listado = new ArrayList<>();
     private String colorPlumas;
 
     public Ave() {
@@ -16,7 +15,6 @@ public class Ave extends Animal {
     public Ave(String nombre, int edad, String habitat, String genero, String colorPlumas) {
         super(nombre, edad, habitat, genero);
         this.colorPlumas = colorPlumas;
-        listado.add(this);
     }
 
     public static int getHalcones() {
@@ -28,7 +26,9 @@ public class Ave extends Animal {
     }
 
     public static int cantidadAves() {
-        return listado.size();
+        return Animal.getListado().stream()
+                .filter(animal -> animal instanceof Ave)
+                .collect(Collectors.toList()).size();
     }
 
     public static Ave crearHalcon(String nombre, int edad, String genero) {
@@ -58,13 +58,5 @@ public class Ave extends Animal {
 
     public void setColorPlumas(String colorPlumas) {
         this.colorPlumas = colorPlumas;
-    }
-
-    public static List<Ave> getListado() {
-        return listado;
-    }
-
-    public static void setListado(List<Ave> listado) {
-        Ave.listado = listado;
     }
 }
