@@ -1,6 +1,6 @@
 
 package zooAnimales;
-
+import java.util.List;
 import gestion.Zona;
 import gestion.Zoologico;
 
@@ -95,8 +95,6 @@ public abstract class Animal {
     }
 
     public static void main(String[] args) {
-        // ...
-    public static void main(String[] args) {
     // Crear un zoológico
     Zoologico zoologico = new Zoologico("Zoológico de la ciudad", "Centro de la ciudad");
 
@@ -127,4 +125,5 @@ public abstract class Animal {
     System.out.println("Cantidad de aves: " + Ave.cantidadAves());
     System.out.println(mamifero1.toString());
     System.out.println(ave1.toString());
+    }
 }
