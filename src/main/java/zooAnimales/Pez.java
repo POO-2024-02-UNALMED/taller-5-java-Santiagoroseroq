@@ -1,6 +1,7 @@
-// Pez.java
-package zooAnimales;
 
+package zooAnimales;
+import java.ArrayList;
+import java.util.List;
 import gestion.Zona;
 
 public class Pez extends Animal {
