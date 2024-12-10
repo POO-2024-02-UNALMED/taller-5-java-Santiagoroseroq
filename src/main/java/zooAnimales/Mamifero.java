@@ -1,14 +1,11 @@
 package zooAnimales;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.stream.Collectors;
 
-import gestion.Zona;
 
 public class Mamifero extends Animal {
     private static int caballos = 0;
     private static int leones = 0;
-    private static List<Mamifero> listado = new ArrayList<>();
     private boolean pelaje;
     private int patas;
 
@@ -20,7 +17,6 @@ public class Mamifero extends Animal {
         super(nombre, edad, habitat, genero);
         this.pelaje = pelaje;
         this.patas = patas;
-        listado.add(this);
     }
 
     public static int getCaballos() {
@@ -32,7 +28,9 @@ public class Mamifero extends Animal {
     }
 
     public static int cantidadMamiferos() {
-        return listado.size();
+        return Animal.getListado().stream()
+                .filter(animal -> animal instanceof Mamifero)
+                .collect(Collectors.toList()).size();
     }
 
     public static Mamifero crearCaballo(String nombre, int edad, String genero) {
@@ -65,13 +63,5 @@ public class Mamifero extends Animal {
 
     public void setPatas(int patas) {
         this.patas = patas;
-    }
-
-    public static List<Mamifero> getListado() {
-        return listado;
-    }
-
-    public static void setListado(List<Mamifero> listado) {
-        Mamifero.listado = listado;
     }
 }
