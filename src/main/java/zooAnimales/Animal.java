@@ -1,19 +1,25 @@
-
 package zooAnimales;
+
+import java.util.ArrayList;
 import java.util.List;
 import gestion.Zona;
-import gestion.Zoologico;
 
 public abstract class Animal {
     private static int totalAnimales = 0;
+    private static List<Animal> listado = new ArrayList<>();
     protected String nombre;
     protected int edad;
     protected String habitat;
     protected String genero;
-    protected Zona zona;
+    private Zona zona;
 
     public Animal() {
+        this.nombre = null;
+        this.edad = 0;
+        this.habitat = null;
+        this.genero = null;
         totalAnimales++;
+        listado.add(this);
     }
 
     public Animal(String nombre, int edad, String habitat, String genero) {
@@ -22,33 +28,22 @@ public abstract class Animal {
         this.habitat = habitat;
         this.genero = genero;
         totalAnimales++;
-    }
-
-    public static int getTotalAnimales() {
-        return totalAnimales;
+        listado.add(this);
     }
 
     public static String totalPorTipo() {
-        int mamiferos = Mamifero.getListado().size();
-        int aves = Ave.getListado().size();
-        int reptiles = Reptil.getListado().size();
-        int peces = Pez.getListado().size();
-        int anfibios = Anfibio.getListado().size();
-
-        return "• Mamíferos: " + mamiferos + "\n" +
-               "• Aves: " + aves + "\n" +
-               "• Reptiles: " + reptiles + "\n" +
-               "• Peces: " + peces + "\n" +
-               "• Anfibios: " + anfibios;
+        String resultado = "";
+        resultado += "Mamiferos: " + Mamifero.cantidadMamiferos() + "\n";
+        resultado += "Aves: " + Ave.cantidadAves() + "\n";
+        resultado += "Reptiles: " + Reptil.cantidadReptiles() + "\n";
+        resultado += "Peces: " + Pez.cantidadPeces() + "\n";
+        resultado += "Anfibios: " + Anfibio.cantidadAnfibios() + "\n";
+        return resultado;
     }
 
     @Override
     public String toString() {
-        if (zona != null) {
-            return "Mi nombre es " + nombre + ", tengo una edad de " + edad + ", habito en " + habitat + " y mi género es " + genero + ". La zona en la que me ubico es " + zona.getNombre() + ", en el " + zona.getZoologico().getNombre() + ".";
-        } else {
-            return "Mi nombre es " + nombre + ", tengo una edad de " + edad + ", habito en " + habitat + " y mi género es " + genero + ".";
-        }
+        return "Mi nombre es " + nombre + ", tengo una edad de " + edad + ", habito en " + habitat + " y mi genero es " + genero;
     }
 
     public abstract String movimiento();
@@ -86,44 +81,27 @@ public abstract class Animal {
         this.genero = genero;
     }
 
+    public static int getTotalAnimales() {
+        return totalAnimales;
+    }
+
+    public static void setTotalAnimales(int totalAnimales) {
+        Animal.totalAnimales = totalAnimales;
+    }
+
+    public static List<Animal> getListado() {
+        return listado;
+    }
+
+    public static void setListado(List<Animal> listado) {
+        Animal.listado = listado;
+    }
+
     public Zona getZona() {
         return zona;
     }
 
     public void setZona(Zona zona) {
         this.zona = zona;
-    }
-
-    public static void main(String[] args) {
-    // Crear un zoológico
-    Zoologico zoologico = new Zoologico("Zoológico de la ciudad", "Centro de la ciudad");
-
-    // Crear zonas en el zoológico
-    Zona zonaMamiferos = new Zona("Mamíferos", zoologico);
-    Zona zonaAves = new Zona("Aves", zoologico);
-
-    // Agregar zonas al zoológico
-    zoologico.agregarZonas(zonaMamiferos);
-    zoologico.agregarZonas(zonaAves);
-
-    // Crear animales
-    Mamifero mamifero1 = Mamifero.crearCaballo("Caballo 1", 5, "Macho");
-    Mamifero mamifero2 = Mamifero.crearLeon("León 1", 3, "Macho");
-    Ave ave1 = Ave.crearHalcon("Halcón 1", 2, "Macho");
-    Ave ave2 = Ave.crearAguila("Águila 1", 4, "Hembra");
-
-    // Agregar animales a las zonas
-    zonaMamiferos.agregarAnimales(mamifero1);
-    zonaMamiferos.agregarAnimales(mamifero2);
-    zonaAves.agregarAnimales(ave1);
-    zonaAves.agregarAnimales(ave2);
-
-    // Imprimir información
-    System.out.println("Zoológico: " + zoologico.getNombre());
-    System.out.println("Cantidad de animales en el zoológico: " + zoologico.cantidadTotalAnimales());
-    System.out.println("Cantidad de mamíferos: " + Mamifero.cantidadMamiferos());
-    System.out.println("Cantidad de aves: " + Ave.cantidadAves());
-    System.out.println(mamifero1.toString());
-    System.out.println(ave1.toString());
     }
 }
