@@ -1,8 +1,7 @@
-
 package zooAnimales;
-import java.ArrayList;
+
+import java.util.ArrayList;
 import java.util.List;
-import gestion.Zona;
 
 public class Pez extends Animal {
     private static int salmones = 0;
@@ -69,13 +68,5 @@ public class Pez extends Animal {
 
     public void setLongitud(int longitud) {
         this.longitud = longitud;
-    }
-
-    public static List<Pez> getListado() {
-        return listado;
-    }
-
-    public static void setListado(List<Pez> listado) {
-        Pez.listado = listado;
     }
 }
