@@ -1,13 +1,13 @@
 package zooAnimales;
 
-import java.util.ArrayList;
-import java.util.List;
-import gestion.Zona;
+
+
+import java.util.stream.Collectors; 
+
 
 public class Anfibio extends Animal {
     private static int ranas = 0;
     private static int salamandras = 0;
-    private static List<Anfibio> listado = new ArrayList<>();
     private boolean pielBatracia;
     private int ojos;
 
@@ -19,7 +19,6 @@ public class Anfibio extends Animal {
         super(nombre, edad, habitat, genero);
         this.pielBatracia = pielBatracia;
         this.ojos = ojos;
-        listado.add(this);
     }
 
     public static int getRanas() {
@@ -31,7 +30,9 @@ public class Anfibio extends Animal {
     }
 
     public static int cantidadAnfibios() {
-        return listado.size();
+        return Animal.getListado().stream()
+                .filter(animal -> animal instanceof Anfibio)
+                .collect(Collectors.toList()).size();
     }
 
     public static Anfibio crearRana(String nombre, int edad, String genero) {
@@ -69,13 +70,5 @@ public class Anfibio extends Animal {
 
     public void setOjos(int ojos) {
         this.ojos = ojos;
-    }
-
-    public static List<Anfibio> getListado() {
-        return listado;
-    }
-
-    public static void setListado(List<Anfibio> listado) {
-        Anfibio.listado = listado;
     }
 }
